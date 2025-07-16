@@ -11,7 +11,8 @@ class MovilController extends Controller
     public function index()
     {
         $movils = Movil::where('estado', 1)->get();
-        return view('movil.index', compact('movils'));
+        $movilsEliminados = Movil::where('estado', 0)->get();
+        return view('movil.index', compact('movils','movilsEliminados'));
     }
 
     public function store(Request $request)
@@ -73,4 +74,28 @@ class MovilController extends Controller
         return response()->json(['success' => true, 'message' => 'Movilidad eliminada correctamente.']);
 
     }
+
+    public function restore($id)
+    {
+        $movil = Movil::findOrFail($id);
+        $existeActiva = Movil::where('placa', $movil->placa)
+            ->where('estado', 1)
+            ->exists();
+
+        if ($existeActiva) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ya existe una movilidad activa con la misma placa.'
+            ]);
+        }
+
+        $movil->estado = 1;
+        $movil->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Movilidad restaurada correctamente.'
+        ]);
+    }
+
 }

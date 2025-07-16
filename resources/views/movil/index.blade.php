@@ -43,35 +43,28 @@
             </div>
         @endif
 
-        <div class="table-responsive">
-            <table class="table table-bordered" id="tabla-traducida" width="100%" cellspacing="0">
-                <thead class="header-modal">
-                    <tr>
-                        <th>#</th>
-                        <th>Marca</th>
-                        <th>Placa</th>
-                        <th class="text-center">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($movils as $key => $movil)
-                    <tr>
-                        <td>{{ $key + 1 }}</td>
-                        <td>{{ $movil->marca }}</td>
-                        <td>{{ $movil->placa }}</td>
-                        <td class="text-center">
-                            @can('editar moviles')
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarMovil-{{ $movil->id }}"><i class="fa fa-edit"></i></a>
-                            @endcan
-                            @can('eliminar moviles')
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $movil->id }}"><i class="fa fa-times"></i></a>
-                            @endcan
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <!-- Tabs -->
+        <ul class="nav nav-tabs mb-3" id="movilTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="activos-tab" data-toggle="tab" href="#activos" role="tab">Activos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="eliminados-tab" data-toggle="tab" href="#eliminados" role="tab">Eliminados</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="movilTabContent">
+            <!-- TAB ACTIVOS -->
+            <div class="tab-pane fade show active" id="activos" role="tabpanel">
+                @include('movil.partials._tabla', ['movils' => $movils, 'tipo' => 'activo', 'tabla' => '1'])
+            </div>
+
+            <!-- TAB ELIMINADOS -->
+            <div class="tab-pane fade" id="eliminados" role="tabpanel">
+                @include('movil.partials._tabla', ['movils' => $movilsEliminados, 'tipo' => 'eliminado', 'tabla' => '2'])
+            </div>
         </div>
+
     </div>
 </div>
 
@@ -155,5 +148,36 @@
             });
         });
     });
+</script>
+
+<script>
+    $('.restore').on('click', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    swal({
+        title: "Restaurar Movilidad",
+        text: "¿Deseas restaurar esta movilidad?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745",
+        confirmButtonText: "Sí, restaurar!",
+        closeOnConfirm: false
+    }, function() {
+        $.ajax({
+            type: "get",
+            url: "/movils-restore/" + id,
+            success: function (data) {
+                if (data.success) {
+                    swal("Restaurado", data.message, "success");
+                    location.reload();
+                } else {
+                    swal("No se pudo restaurar", data.message, "error");
+                }
+            }
+
+        });
+    });
+});
+
 </script>
 @endsection

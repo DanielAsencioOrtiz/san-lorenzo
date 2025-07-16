@@ -29,6 +29,7 @@ class PermisoSeeder extends Seeder
             'crear moviles',
             'editar moviles',
             'eliminar moviles',
+            'restaurar moviles',
             'ver control',
             'ver programa',
             'ver diseño de concreto',

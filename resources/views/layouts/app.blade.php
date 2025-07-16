@@ -241,6 +241,38 @@
                     'copy', 'print', 'excel', 'pdf'
                 ]
             }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+                $('#tabla-traducida-1').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total de entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "No se encontraron resultados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                "buttons": [
+                    'copy', 'print', 'excel', 'pdf'
+                ]
+            }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
             $('#tabla-traducida-2').DataTable({
                 "paging": true,
                 "lengthChange": false,

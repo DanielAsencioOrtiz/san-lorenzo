@@ -42,6 +42,8 @@ Route::get('/movils', [MovilController::class, 'index'])->name('movil.index');
 Route::post('/movils', [MovilController::class, 'store'])->name('movil.store');
 Route::post('/movils/{id}', [MovilController::class, 'update'])->name('movil.update');
 Route::get('/movils-delete/{id}', [MovilController::class, 'destroy'])->name('movil.delete');
+Route::get('/movils-restore/{id}', [MovilController::class, 'restore'])->name('movil.restore');
+
 
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');
