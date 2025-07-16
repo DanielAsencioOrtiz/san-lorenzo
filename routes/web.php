@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MovilController;
+use App\Http\Controllers\TipoConcretoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +45,12 @@ Route::post('/movils/{id}', [MovilController::class, 'update'])->name('movil.upd
 Route::get('/movils-delete/{id}', [MovilController::class, 'destroy'])->name('movil.delete');
 Route::get('/movils-restore/{id}', [MovilController::class, 'restore'])->name('movil.restore');
 
+
+//TIPO CONCRETOS
+Route::get('/tipo_concretos', [TipoConcretoController::class, 'index'])->name('tipo_concretos.index');
+Route::post('/tipo_concretos', [TipoConcretoController::class, 'store'])->name('tipo_concretos.store');
+Route::post('/tipo_concretos/{id}', [TipoConcretoController::class, 'update'])->name('tipo_concretos.update');
+Route::get('/tipo_concretos-delete/{id}', [TipoConcretoController::class, 'destroy'])->name('tipo_concretos.delete');
 
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');

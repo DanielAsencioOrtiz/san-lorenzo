@@ -36,7 +36,9 @@ class PermisoSeeder extends Seeder
             'ver boletas',
             'ver guias de remision',
             'ver tipo concreto',
-            'crear tipo concreto'
+            'crear tipo concreto',
+            'editar tipo concreto',
+            'eliminar tipo concreto'
         ];
 
         // Crear permisos

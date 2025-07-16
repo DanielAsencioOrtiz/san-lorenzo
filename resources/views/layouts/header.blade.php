@@ -39,7 +39,9 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Tipo de Concreto</a>
+                @can ('ver tipo concreto')
+                    <a class="collapse-item" href="{{route('tipo_concretos.index')}}">Tipo de Concreto</a>
+                @endcan
                 <a class="collapse-item" href="#">Metodo de Colocación</a>
                 <a class="collapse-item" href="#">Bombas</a>
                 <a class="collapse-item" href="#">Tipo de Cemento</a>
