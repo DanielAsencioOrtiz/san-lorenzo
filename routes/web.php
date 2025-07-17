@@ -9,6 +9,8 @@ use App\Http\Controllers\TipoConcretoController;
 use App\Http\Controllers\MetodoColocacionController;
 use App\Http\Controllers\BombaController;
 use App\Http\Controllers\TipoCementoController;
+use App\Http\Controllers\EstructuraController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,7 +78,14 @@ Route::get('/tipo_cementos', [TipoCementoController::class, 'index'])->name('tip
 Route::post('/tipo_cementos', [TipoCementoController::class, 'store'])->name('tipo_cementos.store');
 Route::post('/tipo_cementos/{id}', [TipoCementoController::class, 'update'])->name('tipo_cementos.update');
 Route::get('/tipo_cementos-delete/{id}', [TipoCementoController::class, 'destroy'])->name('tipo_cementos.destroy');
-Route::get('/tipo_cementos-restore/{id}', [TipoCementoController::class, 'restore'])->name('tipo_cementos.restore');
+Route::get('/tipo_cementos-restore/{id}', [TipoCementoController::class, 'restores'])->name('tipo_cementos.restore');
+
+//ESTRUCTURAS
+Route::get('/estructuras', [EstructuraController::class, 'index'])->name('estructuras.index');
+Route::post('/estructuras', [EstructuraController::class, 'store'])->name('estructuras.store');
+Route::post('/estructuras/{id}', [EstructuraController::class, 'update'])->name('estructuras.update');
+Route::get('/estructuras-delete/{id}', [EstructuraController::class, 'destroy'])->name('estructuras.destroy');
+Route::get('/estructuras-restore/{id}', [EstructuraController::class, 'restore'])->name('estructuras.restore');
 
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');

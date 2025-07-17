@@ -55,6 +55,11 @@ class PermisoSeeder extends Seeder
             'editar tipo cemento',
             'eliminar tipo cemento',
             'restaurar tipo cemento',
+            'ver estructura',
+            'crear estructura',
+            'editar estructura',
+            'eliminar estructura',
+            'restaurar estructura',
         ];
 
         // Crear permisos
