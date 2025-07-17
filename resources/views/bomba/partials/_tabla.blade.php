@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-bordered" width="100%" cellspacing="0" id="tabla-traducida-bombas">
+    <table class="table table-bordered" width="100%" cellspacing="0" id="tabla-traducida-{{$tabla}}">
         <thead class="header-modal">
             <tr>
                 <th>#</th>
