@@ -14,10 +14,10 @@
                     <td>{{ $tipo_concreto->nombre_tipo }}</td>
                     <td class="text-center">
                         @if ($tipo == 'activo')
-                            @can('editar moviles')
+                            @can('editar tipo concreto')
                                 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarTipoConcreto-{{ $tipo_concreto->id }}"><i class="fa fa-edit"></i></a>
                             @endcan
-                            @can('eliminar moviles')
+                            @can('eliminar tipo concreto')
                                 <a href="#" class="btn btn-danger delete" data-id="{{ $tipo_concreto->id }}"><i class="fa fa-times"></i></a>
                             @endcan
                         @else

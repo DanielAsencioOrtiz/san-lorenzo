@@ -42,7 +42,9 @@
                 @can ('ver tipo concreto')
                     <a class="collapse-item" href="{{route('tipo_concretos.index')}}">Tipo de Concreto</a>
                 @endcan
-                <a class="collapse-item" href="#">Metodo de Colocación</a>
+                @can ('ver metodo colocacion')
+                <a class="collapse-item" href="{{route('metodo_colocacions.index')}}">Metodo de Colocación</a>
+                @endcan
                 <a class="collapse-item" href="#">Bombas</a>
                 <a class="collapse-item" href="#">Tipo de Cemento</a>
                 <a class="collapse-item" href="#">Estructuras</a>

@@ -8,13 +8,13 @@
 @endsection
 
 @section('content')
-<h1 class="h3 mb-2 text-gray-800">Listado de Tipos de Concreto</h1>
-<p class="mb-4">Gestión de tipos de concreto</p>
+<h1 class="h3 mb-2 text-gray-800">Listado de Métodos de Colocación</h1>
+<p class="mb-4">Gestión de métodos de colocación</p>
 
 <div class="card shadow mb-4">
-    @can('crear tipo concreto')
+    @can('crear metodo colocacion')
     <div class="card-header py-3">
-        <a class="btn btn-success" href="#" data-toggle="modal" data-target="#nuevoTipoConcreto"><i class="fa fa-plus"></i> Nuevo Registro</a>
+        <a class="btn btn-success" href="#" data-toggle="modal" data-target="#nuevoMetodoColocacion"><i class="fa fa-plus"></i> Nuevo Registro</a>
     </div>
     @endcan
     <div class="card-body">
@@ -43,8 +43,8 @@
             </div>
         @endif
 
-         <!-- Tabs -->
-         <ul class="nav nav-tabs mb-3" id="movilTabs" role="tablist">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs mb-3" id="metodoTabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="activos-tab" data-toggle="tab" href="#activos" role="tab">Activos</a>
             </li>
@@ -53,33 +53,33 @@
             </li>
         </ul>
 
-        <div class="tab-content" id="movilTabContent">
+        <div class="tab-content" id="metodoTabContent">
             <!-- TAB ACTIVOS -->
             <div class="tab-pane fade show active" id="activos" role="tabpanel">
-                @include('tipo_concretos.partials._tabla', ['tipo_concretos' => $tipo_concretos, 'tipo' => 'activo', 'tabla' => '1'])
+                @include('metodo_colocacion.partials._tabla', ['metodos' => $metodosColocacion, 'tipo' => 'activo', 'tabla' => '1'])
             </div>
 
             <!-- TAB ELIMINADOS -->
             <div class="tab-pane fade" id="eliminados" role="tabpanel">
-                @include('tipo_concretos.partials._tabla', ['tipo_concretos' => $tipo_concretosEliminados, 'tipo' => 'eliminado', 'tabla' => '2'])
+                @include('metodo_colocacion.partials._tabla', ['metodos' => $metodosEliminados, 'tipo' => 'eliminado', 'tabla' => '2'])
             </div>
         </div>
     </div>
 </div>
 
 <!-- MODAL NUEVO -->
-<div class="modal fade" id="nuevoTipoConcreto" tabindex="-1" role="dialog">
+<div class="modal fade" id="nuevoMetodoColocacion" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('tipo_concretos.store') }}" method="POST">
+        <form action="{{ route('metodo_colocacions.store') }}" method="POST">
             @csrf
             <div class="modal-content">
                 <div class="modal-header header-modal">
-                    <h5 class="modal-title">Nuevo Tipo de Concreto</h5>
+                    <h5 class="modal-title">Nuevo Método de Colocación</h5>
                     <button class="close" type="button" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <label>Nombre del Tipo: <span class="red">*</span></label>
-                    <input type="text" name="nombre_tipo" class="form-control" required>
+                    <label>Nombre del Método: <span class="red">*</span></label>
+                    <input type="text" name="nombre_metodo" class="form-control" required>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -91,19 +91,19 @@
 </div>
 
 <!-- MODAL EDITAR -->
-@foreach ($tipo_concretos as $tipo_concreto)
-<div class="modal fade" id="editarTipoConcreto-{{ $tipo_concreto->id }}" tabindex="-1" role="dialog">
+@foreach ($metodosColocacion as $metodo)
+<div class="modal fade" id="editarMetodoColocacion-{{ $metodo->id }}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('tipo_concretos.update', $tipo_concreto->id) }}" method="POST">
+        <form action="{{ route('metodo_colocacions.update', $metodo->id) }}" method="POST">
             @csrf
             <div class="modal-content">
                 <div class="modal-header header-modal">
-                    <h5 class="modal-title">Editar Tipo de Concreto</h5>
+                    <h5 class="modal-title">Editar Método de Colocación</h5>
                     <button class="close" type="button" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <label>Nombre del Tipo: <span class="red">*</span></label>
-                    <input type="text" name="nombre_tipo" class="form-control" value="{{ $tipo_concreto->nombre_tipo }}" required>
+                    <label>Nombre del Método: <span class="red">*</span></label>
+                    <input type="text" name="nombre_metodo" class="form-control" value="{{ $metodo->nombre_metodo }}" required>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -124,7 +124,7 @@
             e.preventDefault();
             var id = $(this).data('id');
             swal({
-                title: "Eliminar Tipo de Concreto",
+                title: "Eliminar Método de Colocación",
                 text: "Esta acción eliminará el registro.",
                 type: "warning",
                 showCancelButton: true,
@@ -134,7 +134,7 @@
             }, function() {
                 $.ajax({
                     type: "get",
-                    url: "/tipo_concretos-delete/" + id,
+                    url: "/metodo_colocacions-delete/" + id,
                     success: function (data) {
                         swal("Eliminado", data.message, "success");
                         location.reload();
@@ -143,15 +143,13 @@
             });
         });
     });
-</script>
 
-<script>
     $('.restore').on('click', function(e) {
         e.preventDefault();
         var id = $(this).data('id');
         swal({
-            title: "Restaurar Tipo de Concreto",
-            text: "¿Deseas restaurar este tipo de concreto?",
+            title: "Restaurar Método de Colocación",
+            text: "¿Deseas restaurar este método de colocación?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#28a745",
@@ -160,7 +158,7 @@
         }, function() {
             $.ajax({
                 type: "get",
-                url: "/tipo_concretos-restore/" + id,
+                url: "/metodo_colocacions-restore/" + id,
                 success: function (data) {
                     if (data.success) {
                         swal("Restaurado", data.message, "success");
@@ -169,7 +167,6 @@
                         swal("No se pudo restaurar", data.message, "error");
                     }
                 }
-
             });
         });
     });
