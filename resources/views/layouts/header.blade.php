@@ -54,7 +54,9 @@
                 @can ('ver estructura')
                 <a class="collapse-item" href="{{route('estructuras.index')}}">Estructuras</a>
                 @endcan
-                <a class="collapse-item" href="#">Obras</a>
+                @can ('ver obra')
+                <a class="collapse-item" href="{{route('obras.index')}}">Obras</a>
+                @endcan
             </div>
         </div>
     </li>
