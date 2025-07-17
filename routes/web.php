@@ -6,6 +6,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MovilController;
 use App\Http\Controllers\TipoConcretoController;
+use App\Http\Controllers\MetodoColocacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +53,13 @@ Route::post('/tipo_concretos', [TipoConcretoController::class, 'store'])->name('
 Route::post('/tipo_concretos/{id}', [TipoConcretoController::class, 'update'])->name('tipo_concretos.update');
 Route::get('/tipo_concretos-delete/{id}', [TipoConcretoController::class, 'destroy'])->name('tipo_concretos.delete');
 Route::get('/tipo_concretos-restore/{id}', [TipoConcretoController::class, 'restore'])->name('tipo_concretos.restore');
+
+//METODO COLOCACION
+Route::get('/metodo_colocacions', [MetodoColocacionController::class, 'index'])->name('metodo_colocacions.index');
+    Route::post('/metodo_colocacions', [MetodoColocacionController::class, 'store'])->name('metodo_colocacions.store');
+    Route::post('/metodo_colocacions/{id}', [MetodoColocacionController::class, 'update'])->name('metodo_colocacions.update');
+    Route::get('/metodo_colocacions-delete/{id}', [MetodoColocacionController::class, 'destroy'])->name('metodo_colocacions.destroy');
+    Route::get('/metodo_colocacions-restore/{id}', [MetodoColocacionController::class, 'restore'])->name('metodo_colocacions.restore');
 
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');
