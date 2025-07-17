@@ -38,7 +38,8 @@ class PermisoSeeder extends Seeder
             'ver tipo concreto',
             'crear tipo concreto',
             'editar tipo concreto',
-            'eliminar tipo concreto'
+            'eliminar tipo concreto',
+            'restaurar tipo concreto'
         ];
 
         // Crear permisos

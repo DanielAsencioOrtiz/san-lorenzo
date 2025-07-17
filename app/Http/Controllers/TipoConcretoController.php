@@ -11,7 +11,8 @@ class TipoConcretoController extends Controller
     public function index()
     {
         $tipo_concretos = TipoConcreto::where('estado', 1)->get();
-        return view('tipo_concretos.index', compact('tipo_concretos'));
+        $tipo_concretosEliminados = TipoConcreto::where('estado', 0)->get();
+        return view('tipo_concretos.index', compact('tipo_concretos','tipo_concretosEliminados'));
     }
 
     public function store(Request $request)
@@ -66,5 +67,28 @@ class TipoConcretoController extends Controller
         $tipo->save();
 
         return response()->json(['success' => true, 'message' => 'Tipo de concreto eliminado correctamente.']);
+    }
+
+    public function restore($id)
+    {
+        $tipo = TipoConcreto::findOrFail($id);
+        $existeActiva = TipoConcreto::where('nombre_tipo', $tipo->nombre_tipo)
+            ->where('estado', 1)
+            ->exists();
+
+        if ($existeActiva) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ya existe un tipo de concreto activo con el mismo nombre.'
+            ]);
+        }
+
+        $tipo->estado = 1;
+        $tipo->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Tipo de concreto activado correctamente.'
+        ]);
     }
 }

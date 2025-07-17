@@ -51,6 +51,7 @@ Route::get('/tipo_concretos', [TipoConcretoController::class, 'index'])->name('t
 Route::post('/tipo_concretos', [TipoConcretoController::class, 'store'])->name('tipo_concretos.store');
 Route::post('/tipo_concretos/{id}', [TipoConcretoController::class, 'update'])->name('tipo_concretos.update');
 Route::get('/tipo_concretos-delete/{id}', [TipoConcretoController::class, 'destroy'])->name('tipo_concretos.delete');
+Route::get('/tipo_concretos-restore/{id}', [TipoConcretoController::class, 'restore'])->name('tipo_concretos.restore');
 
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');
