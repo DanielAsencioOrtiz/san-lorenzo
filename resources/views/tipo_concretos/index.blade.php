@@ -43,34 +43,26 @@
             </div>
         @endif
 
-        <div class="table-responsive">
-            <table class="table table-bordered" id="tabla-traducida" width="100%" cellspacing="0">
-                <thead class="header-modal">
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre del Tipo</th>
-                        <th>Estado</th>
-                        <th class="text-center">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($tipo_concretos as $key => $tipo_concreto)
-                    <tr>
-                        <td>{{ $key + 1 }}</td>
-                        <td>{{ $tipo_concreto->nombre_tipo }}</td>
-                        <td>{{ $tipo_concreto->estado ? 'Activo' : 'Inactivo' }}</td>
-                        <td class="text-center">
-                            @can('editar tipo concreto')
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarTipoConcreto-{{ $tipo_concreto->id }}"><i class="fa fa-edit"></i></a>
-                            @endcan
-                            @can('eliminar tipo concreto')
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $tipo_concreto->id }}"><i class="fa fa-times"></i></a>
-                            @endcan
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+         <!-- Tabs -->
+         <ul class="nav nav-tabs mb-3" id="movilTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="activos-tab" data-toggle="tab" href="#activos" role="tab">Activos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="eliminados-tab" data-toggle="tab" href="#eliminados" role="tab">Eliminados</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="movilTabContent">
+            <!-- TAB ACTIVOS -->
+            <div class="tab-pane fade show active" id="activos" role="tabpanel">
+                @include('tipo_concretos.partials._tabla', ['tipo_concretos' => $tipo_concretos, 'tipo' => 'activo', 'tabla' => '1'])
+            </div>
+
+            <!-- TAB ELIMINADOS -->
+            <div class="tab-pane fade" id="eliminados" role="tabpanel">
+                @include('tipo_concretos.partials._tabla', ['tipo_concretos' => $tipo_concretosEliminados, 'tipo' => 'eliminado', 'tabla' => '2'])
+            </div>
         </div>
     </div>
 </div>
@@ -88,11 +80,6 @@
                 <div class="modal-body">
                     <label>Nombre del Tipo: <span class="red">*</span></label>
                     <input type="text" name="nombre_tipo" class="form-control" required>
-                    <label class="mt-2">Estado:</label>
-                    <select name="estado" class="form-control">
-                        <option value="1" selected>Activo</option>
-                        <option value="0">Inactivo</option>
-                    </select>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -117,11 +104,6 @@
                 <div class="modal-body">
                     <label>Nombre del Tipo: <span class="red">*</span></label>
                     <input type="text" name="nombre_tipo" class="form-control" value="{{ $tipo_concreto->nombre_tipo }}" required>
-                    <label class="mt-2">Estado:</label>
-                    <select name="estado" class="form-control">
-                        <option value="1" {{ $tipo_concreto->estado ? 'selected' : '' }}>Activo</option>
-                        <option value="0" {{ !$tipo_concreto->estado ? 'selected' : '' }}>Inactivo</option>
-                    </select>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -158,6 +140,36 @@
                         location.reload();
                     }
                 });
+            });
+        });
+    });
+</script>
+
+<script>
+    $('.restore').on('click', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        swal({
+            title: "Restaurar Tipo de Concreto",
+            text: "¿Deseas restaurar este tipo de concreto?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745",
+            confirmButtonText: "Sí, restaurar!",
+            closeOnConfirm: false
+        }, function() {
+            $.ajax({
+                type: "get",
+                url: "/tipo_concretos-restore/" + id,
+                success: function (data) {
+                    if (data.success) {
+                        swal("Restaurado", data.message, "success");
+                        location.reload();
+                    } else {
+                        swal("No se pudo restaurar", data.message, "error");
+                    }
+                }
+
             });
         });
     });
