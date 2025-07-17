@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MovilController;
 use App\Http\Controllers\TipoConcretoController;
 use App\Http\Controllers\MetodoColocacionController;
+use App\Http\Controllers\BombaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,10 +57,17 @@ Route::get('/tipo_concretos-restore/{id}', [TipoConcretoController::class, 'rest
 
 //METODO COLOCACION
 Route::get('/metodo_colocacions', [MetodoColocacionController::class, 'index'])->name('metodo_colocacions.index');
-    Route::post('/metodo_colocacions', [MetodoColocacionController::class, 'store'])->name('metodo_colocacions.store');
-    Route::post('/metodo_colocacions/{id}', [MetodoColocacionController::class, 'update'])->name('metodo_colocacions.update');
-    Route::get('/metodo_colocacions-delete/{id}', [MetodoColocacionController::class, 'destroy'])->name('metodo_colocacions.destroy');
-    Route::get('/metodo_colocacions-restore/{id}', [MetodoColocacionController::class, 'restore'])->name('metodo_colocacions.restore');
+Route::post('/metodo_colocacions', [MetodoColocacionController::class, 'store'])->name('metodo_colocacions.store');
+Route::post('/metodo_colocacions/{id}', [MetodoColocacionController::class, 'update'])->name('metodo_colocacions.update');
+Route::get('/metodo_colocacions-delete/{id}', [MetodoColocacionController::class, 'destroy'])->name('metodo_colocacions.destroy');
+Route::get('/metodo_colocacions-restore/{id}', [MetodoColocacionController::class, 'restore'])->name('metodo_colocacions.restore');
 
+//BOMBAS
+
+Route::get('/bombas', [BombaController::class, 'index'])->name('bombas.index');
+Route::post('/bombas', [BombaController::class, 'store'])->name('bombas.store');
+Route::post('/bombas/{id}', [BombaController::class, 'update'])->name('bombas.update');
+Route::get('/bombas-delete/{id}', [BombaController::class, 'destroy'])->name('bombas.destroy');
+Route::get('/bombas-restore/{id}', [BombaController::class, 'restore'])->name('bombas.restore');
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');

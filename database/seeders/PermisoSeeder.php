@@ -45,6 +45,11 @@ class PermisoSeeder extends Seeder
             'editar metodo colocacion',
             'eliminar metodo colocacion',
             'restaurar metodo colocacion',
+            'ver bomba',
+            'crear bomba',
+            'editar bomba',
+            'eliminar bomba',
+            'restaurar bomba',
         ];
 
         // Crear permisos
