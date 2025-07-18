@@ -70,6 +70,11 @@ class PermisoSeeder extends Seeder
             'editar resistencia',
             'eliminar resistencia',
             'restaurar resistencia',
+            'ver slam',
+            'crear slam',
+            'editar slam',
+            'eliminar slam',
+            'restaurar slam',
         ];
 
         // Crear permisos
