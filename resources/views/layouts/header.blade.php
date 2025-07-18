@@ -48,8 +48,10 @@
                 @can ('ver bomba')
                     <a class="collapse-item" href="{{route('bombas.index')}}">Bombas</a>
                 @endcan
-                <a class="collapse-item" href="#">Tipo de Cemento</a>
+                @can ('ver tipo cemento')
+                <a class="collapse-item" href="{{route('tipo_cementos.index')}}">Tipo de Cemento</a>
                 <a class="collapse-item" href="#">Estructuras</a>
+                @endcan
                 <a class="collapse-item" href="#">Obras</a>
             </div>
         </div>
