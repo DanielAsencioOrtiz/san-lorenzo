@@ -60,6 +60,11 @@ class PermisoSeeder extends Seeder
             'editar estructura',
             'eliminar estructura',
             'restaurar estructura',
+            'ver obra',
+            'crear obra',
+            'editar obra',
+            'eliminar obra',
+            'restaurar obra',
         ];
 
         // Crear permisos

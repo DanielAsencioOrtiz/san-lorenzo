@@ -10,6 +10,7 @@ use App\Http\Controllers\MetodoColocacionController;
 use App\Http\Controllers\BombaController;
 use App\Http\Controllers\TipoCementoController;
 use App\Http\Controllers\EstructuraController;
+use App\Http\Controllers\ObraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,13 @@ Route::post('/estructuras', [EstructuraController::class, 'store'])->name('estru
 Route::post('/estructuras/{id}', [EstructuraController::class, 'update'])->name('estructuras.update');
 Route::get('/estructuras-delete/{id}', [EstructuraController::class, 'destroy'])->name('estructuras.destroy');
 Route::get('/estructuras-restore/{id}', [EstructuraController::class, 'restore'])->name('estructuras.restore');
+
+//OBRAS
+Route::get('/obras', [ObraController::class, 'index'])->name('obras.index');
+Route::post('/obras', [ObraController::class, 'store'])->name('obras.store');
+Route::post('/obras/{id}', [ObraController::class, 'update'])->name('obras.update');
+Route::get('/obras-delete/{id}', [ObraController::class, 'destroy'])->name('obras.destroy');
+Route::get('/obras-restore/{id}', [ObraController::class, 'restore'])->name('obras.restore');
 
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');
