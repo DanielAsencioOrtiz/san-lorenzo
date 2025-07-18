@@ -65,6 +65,11 @@ class PermisoSeeder extends Seeder
             'editar obra',
             'eliminar obra',
             'restaurar obra',
+            'ver resistencia',
+            'crear resistencia',
+            'editar resistencia',
+            'eliminar resistencia',
+            'restaurar resistencia',
         ];
 
         // Crear permisos

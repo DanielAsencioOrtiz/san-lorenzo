@@ -45,14 +45,20 @@
                 @can ('ver metodo colocacion')
                     <a class="collapse-item" href="{{route('metodo_colocacions.index')}}">Metodo de Colocación</a>
                 @endcan
-                @can ('ver bomba')
-                    <a class="collapse-item" href="{{route('bombas.index')}}">Bombas</a>
+                @can ('ver resistencia')
+                    <a class="collapse-item" href="{{route('resistencias.index')}}">Resistencias</a>
+                @endcan
+                @can ('ver slam')
+                    <a class="collapse-item" href="{{route('slams.index')}}">Bombas</a>
                 @endcan
                 @can ('ver tipo cemento')
                 <a class="collapse-item" href="{{route('tipo_cementos.index')}}">Tipo de Cemento</a>
                 @endcan
                 @can ('ver estructura')
                 <a class="collapse-item" href="{{route('estructuras.index')}}">Estructuras</a>
+                @endcan
+                @can ('ver bomba')
+                    <a class="collapse-item" href="{{route('bombas.index')}}">Bombas</a>
                 @endcan
                 @can ('ver obra')
                 <a class="collapse-item" href="{{route('obras.index')}}">Obras</a>

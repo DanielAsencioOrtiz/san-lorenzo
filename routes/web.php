@@ -11,6 +11,7 @@ use App\Http\Controllers\BombaController;
 use App\Http\Controllers\TipoCementoController;
 use App\Http\Controllers\EstructuraController;
 use App\Http\Controllers\ObraController;
+use App\Http\Controllers\ResistenciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,20 @@ Route::post('/estructuras', [EstructuraController::class, 'store'])->name('estru
 Route::post('/estructuras/{id}', [EstructuraController::class, 'update'])->name('estructuras.update');
 Route::get('/estructuras-delete/{id}', [EstructuraController::class, 'destroy'])->name('estructuras.destroy');
 Route::get('/estructuras-restore/{id}', [EstructuraController::class, 'restore'])->name('estructuras.restore');
+
+//OBRAS
+Route::get('/obras', [ObraController::class, 'index'])->name('obras.index');
+Route::post('/obras', [ObraController::class, 'store'])->name('obras.store');
+Route::post('/obras/{id}', [ObraController::class, 'update'])->name('obras.update');
+Route::get('/obras-delete/{id}', [ObraController::class, 'destroy'])->name('obras.destroy');
+Route::get('/obras-restore/{id}', [ObraController::class, 'restore'])->name('obras.restore');
+
+//RESISTENCIAS
+Route::get('/resistencias', [ResistenciaController::class, 'index'])->name('resistencias.index');
+Route::post('/resistencias', [ResistenciaController::class, 'store'])->name('resistencias.store');
+Route::post('/resistencias/{id}', [ResistenciaController::class, 'update'])->name('resistencias.update');
+Route::get('/resistencias-delete/{id}', [ResistenciaController::class, 'destroy'])->name('resistencias.destroy');
+Route::get('/resistencias-restore/{id}', [ResistenciaController::class, 'restore'])->name('resistencias.restore');
 
 //OBRAS
 Route::get('/obras', [ObraController::class, 'index'])->name('obras.index');
