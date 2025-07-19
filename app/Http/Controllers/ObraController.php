@@ -10,8 +10,8 @@ class ObraController extends Controller
 {
     public function index()
     {
-        $obras = Obra::where('estado', 1)->get();
-        $obrasEliminadas = Obra::where('estado', 0)->get();
+        $obras = Obra::where('estado', 1)->orderBy('created_at', 'desc')->get();
+        $obrasEliminadas = Obra::where('estado', 0)->orderBy('created_at', 'desc')->get();
         return view('obra.index', compact('obras', 'obrasEliminadas'));
     }
 

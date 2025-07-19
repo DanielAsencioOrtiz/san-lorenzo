@@ -8,11 +8,11 @@
 @endsection
 
 @section('content')
-<h1 class="h3 mb-2 text-gray-800">Listado de Movilidades</h1>
-<p class="mb-4">Gestión de vehículos/movilidades</p>
+<h1 class="h3 mb-2 text-gray-800">Listado de Maquinaria</h1>
+<p class="mb-4">Gestión de maquinaria</p>
 
 <div class="card shadow mb-4">
-    @can('crear moviles')
+    @can('crear maquinaria')
     <div class="card-header py-3">
         <a class="btn btn-success" href="#" data-toggle="modal" data-target="#nuevoMovil"><i class="fa fa-plus"></i> Nuevo Registro</a>
     </div>
@@ -75,14 +75,20 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header header-modal">
-                    <h5 class="modal-title">Nuevo Movil</h5>
+                    <h5 class="modal-title">Nueva Maquinaria</h5>
                     <button class="close" type="button" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <label>Marca: <span class="red">*</span></label>
-                    <input type="text" name="marca" class="form-control" required>
+                    <label>Serie: <span class="red">*</span></label>
+                    <input type="text" name="serie" class="form-control" required>
+                    <label class="mt-2">Descripción: <span class="red">*</span></label>
+                    <input type="text" name="descripcion" class="form-control" required>
+                    <label class="mt-2">Modelo: <span class="red">*</span></label>
+                    <input type="text" name="modelo" class="form-control" required>
                     <label class="mt-2">Placa: <span class="red">*</span></label>
                     <input type="text" name="placa" class="form-control" required>
+                    <label class="mt-2">Forms: <span class="red">*</span></label>
+                    <input type="text" name="forms" class="form-control" required>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -101,14 +107,20 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header header-modal">
-                    <h5 class="modal-title">Editar Movil</h5>
+                    <h5 class="modal-title">Editar Maquinaria</h5>
                     <button class="close" type="button" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <label>Marca: <span class="red">*</span></label>
-                    <input type="text" name="marca" class="form-control" value="{{ $movil->marca }}" required>
+                    <label >Serie: <span class="red">*</span></label>
+                    <input type="text" name="serie" class="form-control" value="{{ $movil->serie }}" required>
+                    <label class="mt-2">Descripción: <span class="red">*</span></label>
+                    <input type="text" name="descripcion" class="form-control" value="{{ $movil->descripcion }}" required>
+                    <label class="mt-2">Modelo: <span class="red">*</span></label>
+                    <input type="text" name="modelo" class="form-control" value="{{ $movil->modelo }}" required>
                     <label class="mt-2">Placa: <span class="red">*</span></label>
                     <input type="text" name="placa" class="form-control" value="{{ $movil->placa }}" required>
+                    <label class="mt-2">Forms: <span class="red">*</span></label>
+                    <input type="text" name="forms" class="form-control"  value="{{ $movil->forms }}" required>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -129,7 +141,7 @@
             e.preventDefault();
             var id = $(this).data('id');
             swal({
-                title: "Eliminar Movilidad",
+                title: "Eliminar Maquinaria",
                 text: "Esta acción eliminará el registro.",
                 type: "warning",
                 showCancelButton: true,
@@ -155,8 +167,8 @@
     e.preventDefault();
     var id = $(this).data('id');
     swal({
-        title: "Restaurar Movilidad",
-        text: "¿Deseas restaurar esta movilidad?",
+        title: "Restaurar Maquinaria",
+        text: "¿Deseas restaurar esta maquinaria?",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#28a745",

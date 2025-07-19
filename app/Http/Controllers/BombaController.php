@@ -10,16 +10,24 @@ class BombaController extends Controller
 {
     public function index()
     {
-        $bombas = Bomba::where('estado', 1)->get(); 
-        $bombasEliminadas = Bomba::where('estado', 0)->get();
+        $bombas = Bomba::where('estado', 1)->orderBy('created_at', 'desc')->get(); 
+        $bombasEliminadas = Bomba::where('estado', 0)->orderBy('created_at', 'desc')->get();
 
         return view('bomba.index', compact('bombas', 'bombasEliminadas'));
     }
 
     public function store(Request $request)
     {
+
         $request->validate([
-            'nombre_bomba' => 'required|string|max:255',
+            'nombre_bomba' => [
+                'required',
+                'string',
+                Rule::unique('bombas', 'nombre_bomba')->where('estado', 1)
+            ],
+        ], [
+            'nombre_bomba.required' => 'El nombre del tipo de bomba es obligatorio.',
+            'nombre_bomba.unique' => 'Ya existe el tipo de bomba activa con ese nombre.',
         ]);
 
         Bomba::create($request->only('nombre_bomba'));
@@ -30,13 +38,20 @@ class BombaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombre_bomba' => 'required|string|max:255',
+            'nombre_bomba' => [
+                'required',
+                'string',
+                Rule::unique('bombas', 'nombre_bomba')->where('estado', 1)
+            ],
+        ], [
+            'nombre_bomba.required' => 'El nombre del tipo de bomba es obligatorio.',
+            'nombre_bomba.unique' => 'Ya existe el tipo de bomba activa con ese nombre.',
         ]);
 
         $bomba = Bomba::findOrFail($id);
         $bomba->update($request->only('nombre_bomba'));
 
-        return redirect()->back()->with('success', 'Bomba actualizada.');
+        return redirect()->back()->with('mensaje', 'Bomba actualizada.');
     }
 
     public function destroy($id)
@@ -44,7 +59,7 @@ class BombaController extends Controller
         $bomba = Bomba::findOrFail($id);
         $bomba->update(['estado' => 0]);
 
-        return redirect()->back()->with('success', 'Bomba desactivada.');
+        return redirect()->back()->with('mensaje', 'Bomba desactivada.');
     }
 
     public function restore($id)

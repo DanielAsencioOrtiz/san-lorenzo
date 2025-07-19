@@ -13,6 +13,11 @@ use App\Http\Controllers\EstructuraController;
 use App\Http\Controllers\ObraController;
 use App\Http\Controllers\ResistenciaController;
 use App\Http\Controllers\SlamController;
+use App\Http\Controllers\TipoPersonalController;
+use App\Http\Controllers\SedeController;
+use App\Http\Controllers\TipoDocumentoController;
+use App\Http\Controllers\PersonalController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +86,7 @@ Route::get('/tipo_cementos', [TipoCementoController::class, 'index'])->name('tip
 Route::post('/tipo_cementos', [TipoCementoController::class, 'store'])->name('tipo_cementos.store');
 Route::post('/tipo_cementos/{id}', [TipoCementoController::class, 'update'])->name('tipo_cementos.update');
 Route::get('/tipo_cementos-delete/{id}', [TipoCementoController::class, 'destroy'])->name('tipo_cementos.destroy');
-Route::get('/tipo_cementos-restore/{id}', [TipoCementoController::class, 'restores'])->name('tipo_cementos.restore');
+Route::get('/tipo_cementos-restore/{id}', [TipoCementoController::class, 'restore'])->name('tipo_cementos.restore');
 
 //ESTRUCTURAS
 Route::get('/estructuras', [EstructuraController::class, 'index'])->name('estructuras.index');
@@ -110,6 +115,34 @@ Route::post('/slams', [SlamController::class, 'store'])->name('slams.store');
 Route::post('/slams/{id}', [SlamController::class, 'update'])->name('slams.update');
 Route::get('/slams-delete/{id}', [SlamController::class, 'destroy'])->name('slams.destroy');
 Route::get('/slams-restore/{id}', [SlamController::class, 'restore'])->name('slams.restore');
+
+//TIPO PERSONAL
+Route::get('/tipo-personal', [TipoPersonalController::class, 'index'])->name('tipo-personal.index');
+Route::post('/tipo-personal', [TipoPersonalController::class, 'store'])->name('tipo-personal.store');
+Route::post('/tipo-personal/{id}', [TipoPersonalController::class, 'update'])->name('tipo-personal.update');
+Route::get('/tipo-personal-delete/{id}', [TipoPersonalController::class, 'destroy']);
+Route::get('/tipo-personal-restore/{id}', [TipoPersonalController::class, 'restore']);
+
+//SEDE
+Route::get('/sede', [SedeController::class, 'index'])->name('sede.index');
+Route::post('/sede', [SedeController::class, 'store'])->name('sede.store');
+Route::post('/sede/{id}', [SedeController::class, 'update'])->name('sede.update');
+Route::get('/sede-delete/{id}', [SedeController::class, 'destroy']);
+Route::get('/sede-restore/{id}', [SedeController::class, 'restore']);
+
+//TIPO DOCUMENTO
+Route::get('/tipo-documento', [TipoDocumentoController::class, 'index'])->name('tipo-documento.index');
+Route::post('/tipo-documento', [TipoDocumentoController::class, 'store'])->name('tipo-documento.store');
+Route::post('/tipo-documento/{id}', [TipoDocumentoController::class, 'update'])->name('tipo-documento.update');
+Route::get('/tipo-documento-delete/{id}', [TipoDocumentoController::class, 'destroy']);
+Route::get('/tipo-documento-restore/{id}', [TipoDocumentoController::class, 'restore']);
+
+//PERSONAL
+Route::get('/personal', [PersonalController::class, 'index'])->name('personal.index');
+Route::post('/personal', [PersonalController::class, 'store'])->name('personal.store');
+Route::post('/personal/{id}', [PersonalController::class, 'update'])->name('personal.update');
+Route::get('/personal-delete/{id}', [PersonalController::class, 'destroy']);
+Route::get('/personal-restore/{id}', [PersonalController::class, 'restore']);
 
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');

@@ -10,8 +10,8 @@ class TipoConcretoController extends Controller
 {
     public function index()
     {
-        $tipo_concretos = TipoConcreto::where('estado', 1)->get();
-        $tipo_concretosEliminados = TipoConcreto::where('estado', 0)->get();
+        $tipo_concretos = TipoConcreto::where('estado', 1)->orderBy('created_at', 'desc')->get();
+        $tipo_concretosEliminados = TipoConcreto::where('estado', 0)->orderBy('created_at', 'desc')->get();
         return view('tipo_concretos.index', compact('tipo_concretos','tipo_concretosEliminados'));
     }
 

@@ -10,8 +10,8 @@ class ResistenciaController extends Controller
 {
     public function index()
     {
-        $resistencias = Resistencia::where('estado', 1)->get();
-        $resistenciasEliminadas = Resistencia::where('estado', 0)->get();
+        $resistencias = Resistencia::where('estado', 1)->orderBy('created_at', 'desc')->get();
+        $resistenciasEliminadas = Resistencia::where('estado', 0)->orderBy('created_at', 'desc')->get();
         return view('resistencia.index', compact('resistencias','resistenciasEliminadas'));
     }
 

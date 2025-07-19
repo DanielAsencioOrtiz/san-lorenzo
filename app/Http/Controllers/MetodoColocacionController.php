@@ -10,17 +10,26 @@ class MetodoColocacionController extends Controller
 {
     public function index()
     {
-        $metodosColocacion = MetodoColocacion::where('estado', 1)->get();
-        $metodosEliminados = MetodoColocacion::where('estado', 0)->get();
+        $metodosColocacion = MetodoColocacion::where('estado', 1)->orderBy('created_at', 'desc')->get();
+        $metodosEliminados = MetodoColocacion::where('estado', 0)->orderBy('created_at', 'desc')->get();
 
         return view('metodo_colocacion.index', compact('metodosColocacion', 'metodosEliminados'));
     }
 
     public function store(Request $request)
     {
+
         $request->validate([
-            'nombre_metodo' => 'required|string|unique:metodo_colocacions,nombre_metodo',
+            'nombre_metodo' => [
+                'required',
+                'string',
+                Rule::unique('metodo_colocacions', 'nombre_metodo')->where('estado', 1)
+            ],
+        ], [
+            'nombre_metodo.required' => 'El nombre del metodo de colocación es obligatorio.',
+            'nombre_metodo.unique' => 'Ya existe un metodo de colocación activa con ese nombre.',
         ]);
+
 
         MetodoColocacion::create([
             'nombre_metodo' => $request->nombre_metodo
@@ -39,6 +48,9 @@ class MetodoColocacionController extends Controller
                 'string',
                 Rule::unique('metodo_colocacions', 'nombre_metodo')->ignore($metodo->id)
             ]
+        ], [
+            'nombre_metodo.required' => 'El nombre del metodo de colocación es obligatorio.',
+            'nombre_metodo.unique' => 'Ya existe un metodo de colocación activa con ese nombre.',
         ]);
 
         $metodo->update([

@@ -12,8 +12,11 @@ class Movil extends Model
     protected $table = 'movils';
 
     protected $fillable = [
-        'marca',
+        'modelo',
         'placa',
-        'estado',
+        'serie',
+        'descripcion',
+        'forms',
+        'estado'
     ];
 }

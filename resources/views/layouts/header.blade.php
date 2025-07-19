@@ -18,50 +18,50 @@
 -->
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
+        <a class="nav-link collapsed {{ request()->is('tipo-documento*','sede*') ? 'active' : '' }}" href="#" data-toggle="collapse" data-target="#collapsePages2"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-cogs"></i>
             <span>Configuración General</span>
         </a>
-        <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages2" class="collapse {{ request()->is('tipo-documento*','sede*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Sedes</a>
-                <a class="collapse-item" href="#">Tipo de Documento</a>
+                <a class="collapse-item {{ request()->routeIs('sede.index') ? 'active' : '' }}" href="{{route('sede.index')}}">Sedes</a>
+                <a class="collapse-item {{ request()->routeIs('tipo-documento.index') ? 'active' : '' }}" href="{{route('tipo-documento.index')}}">Tipo de Documento</a>
             </div>
         </div>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+        <a class="nav-link collapsed {{ request()->is('tipo_concretos*','metodo_colocacions*','bombas*', 'tipo_cementos*', 'estructuras*','obras*','resistencias*','slams*') ? 'active' : '' }}" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-truck-loading"></i>
             <span>Configuración Despacho</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages" class="collapse {{ request()->is('tipo_concretos*','metodo_colocacions*','bombas*', 'tipo_cementos*', 'estructuras*','obras*','resistencias*','slams*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @can ('ver tipo concreto')
-                    <a class="collapse-item" href="{{route('tipo_concretos.index')}}">Tipo de Concreto</a>
+                    <a class="collapse-item {{ request()->routeIs('tipo_concretos.index') ? 'active' : '' }}" href="{{route('tipo_concretos.index')}}">Tipo de Concreto</a>
                 @endcan
                 @can ('ver metodo colocacion')
-                    <a class="collapse-item" href="{{route('metodo_colocacions.index')}}">Metodo de Colocación</a>
+                    <a class="collapse-item {{ request()->routeIs('metodo_colocacions.index') ? 'active' : '' }}" href="{{route('metodo_colocacions.index')}}">Metodo de Colocación</a>
                 @endcan
                 @can ('ver resistencia')
-                    <a class="collapse-item" href="{{route('resistencias.index')}}">Resistencias</a>
+                    <a class="collapse-item {{ request()->routeIs('resistencias.index') ? 'active' : '' }}" href="{{route('resistencias.index')}}">Resistencias</a>
                 @endcan
                 @can ('ver slam')
-                    <a class="collapse-item" href="{{route('slams.index')}}">Slams</a>
+                    <a class="collapse-item {{ request()->routeIs('slams.index') ? 'active' : '' }}" href="{{route('slams.index')}}">Slams</a>
                 @endcan
                 @can ('ver tipo cemento')
-                <a class="collapse-item" href="{{route('tipo_cementos.index')}}">Tipo de Cemento</a>
+                <a class="collapse-item {{ request()->routeIs('tipo_cementos.index') ? 'active' : '' }}" href="{{route('tipo_cementos.index')}}">Tipo de Cemento</a>
                 @endcan
                 @can ('ver estructura')
-                <a class="collapse-item" href="{{route('estructuras.index')}}">Estructuras</a>
+                <a class="collapse-item {{ request()->routeIs('estructuras.index') ? 'active' : '' }}" href="{{route('estructuras.index')}}">Estructuras</a>
                 @endcan
                 @can ('ver bomba')
-                    <a class="collapse-item" href="{{route('bombas.index')}}">Bombas</a>
+                    <a class="collapse-item {{ request()->routeIs('bombas.index') ? 'active' : '' }}" href="{{route('bombas.index')}}">Bombas</a>
                 @endcan
                 @can ('ver obra')
-                <a class="collapse-item" href="{{route('obras.index')}}">Obras</a>
+                <a class="collapse-item {{ request()->routeIs('obras.index') ? 'active' : '' }}" href="{{route('obras.index')}}">Obras</a>
                 @endcan
             </div>
         </div>
@@ -85,15 +85,15 @@
 
     @can('ver personal')
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
+        <a class="nav-link collapsed {{ request()->is('tipo-personal*','personal*') ? 'active' : '' }}" href="#" data-toggle="collapse" data-target="#collapsePages3"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-id-badge"></i>
             <span>Personal</span>
         </a>
-        <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages3" class="collapse {{ request()->is('tipo-personal*','personal*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Tipo de Personal</a>
-                <a class="collapse-item" href="#">Lista de Personal</a>
+                <a class="collapse-item {{ request()->routeIs('tipo-personal.index') ? 'active' : '' }}" href="{{route('tipo-personal.index')}}">Tipo de Personal</a>
+                <a class="collapse-item {{ request()->routeIs('personal.index') ? 'active' : '' }}" href="{{route('personal.index')}}">Lista de Personal</a>
             </div>
         </div>
     </li>
@@ -107,11 +107,11 @@
     </li>
     @endcan
 
-    @can('ver moviles')
+    @can('ver maquinaria')
     <li class="nav-item {{ request()->routeIs('movil.index') ? 'active' : '' }}">
         <a class="nav-link " href="{{route('movil.index')}}">
             <i class="fas fa-shuttle-van"></i>
-            <span>Movilidades</span></a>
+            <span>Maquinaria</span></a>
     </li>
     @endcan
 

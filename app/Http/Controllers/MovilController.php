@@ -10,32 +10,37 @@ class MovilController extends Controller
 {
     public function index()
     {
-        $movils = Movil::where('estado', 1)->get();
-        $movilsEliminados = Movil::where('estado', 0)->get();
+        $movils = Movil::where('estado', 1)->orderBy('created_at', 'desc')->get();
+        $movilsEliminados = Movil::where('estado', 0)->orderBy('created_at', 'desc')->get();
         return view('movil.index', compact('movils','movilsEliminados'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'marca' => 'required|string',
-            'placa' => [
+            'modelo' => 'required|string',
+            'placa' => 'required|string',
+            'serie' => [
                 'required',
                 'string',
-                Rule::unique('movils', 'placa')->where('estado', 1)
+                Rule::unique('movils', 'serie')->where('estado', 1)
             ],
         ], [
-            'placa.unique' => 'Ya existe una movilidad activa con esa placa.',
-            'marca.required' => 'La marca es obligatoria.',
+            'serie.unique' => 'Ya existe una maquinaria activa con esa serie.',
+            'modelo.required' => 'La modelo es obligatoria.',
             'placa.required' => 'La placa es obligatoria.',
+            'serie.required' => 'La serie es obligatoria.',
         ]);
 
         Movil::create([
-            'marca' => $request->marca,
+            'modelo' => $request->modelo,
             'placa' => $request->placa,
+            'serie' => $request->serie,
+            'descripcion'=> $request->descripcion,
+            'forms'=> $request->forms
         ]);
 
-        return back()->with('mensaje', 'Movilidad registrada correctamente.');
+        return back()->with('mensaje', 'Maquinaria registrada correctamente.');
     }
 
 
@@ -44,24 +49,29 @@ class MovilController extends Controller
         $movil = Movil::findOrFail($id);
 
         $request->validate([
-            'marca' => 'required|string',
-            'placa' => [
+            'modelo' => 'required|string',
+            'placa' => 'required|string',
+            'serie' => [
                 'required',
                 'string',
-                Rule::unique('movils', 'placa')
-                    ->where('estado', 1)
-                    ->ignore($movil->id)
+                Rule::unique('movils', 'serie')->where('estado', 1)->ignore($movil->id)
             ],
         ], [
-            'placa.unique' => 'Ya existe otra movilidad activa con esa placa.',
+            'serie.unique' => 'Ya existe una maquinaria activa con esa serie.',
+            'modelo.required' => 'La modelo es obligatoria.',
+            'placa.required' => 'La placa es obligatoria.',
+            'serie.required' => 'La serie es obligatoria.',
         ]);
 
         $movil->update([
-            'marca' => $request->marca,
+            'modelo' => $request->modelo,
             'placa' => $request->placa,
+            'serie' => $request->serie,
+            'descripcion'=> $request->descripcion,
+            'forms'=> $request->forms
         ]);
 
-        return back()->with('mensaje', 'Movilidad actualizada correctamente.');
+        return back()->with('mensaje', 'Maquinaria actualizada correctamente.');
     }
 
 
@@ -71,21 +81,21 @@ class MovilController extends Controller
         $movil->estado = 0;
         $movil->save();
 
-        return response()->json(['success' => true, 'message' => 'Movilidad eliminada correctamente.']);
+        return response()->json(['success' => true, 'message' => 'Maquinaria eliminada correctamente.']);
 
     }
 
     public function restore($id)
     {
         $movil = Movil::findOrFail($id);
-        $existeActiva = Movil::where('placa', $movil->placa)
+        $existeActiva = Movil::where('serie', $movil->serie)
             ->where('estado', 1)
             ->exists();
 
         if ($existeActiva) {
             return response()->json([
                 'success' => false,
-                'message' => 'Ya existe una movilidad activa con la misma placa.'
+                'message' => 'Ya existe una maquinaria activa con la misma serie.'
             ]);
         }
 
@@ -94,7 +104,7 @@ class MovilController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Movilidad restaurada correctamente.'
+            'message' => 'Maquinaria restaurada correctamente.'
         ]);
     }
 

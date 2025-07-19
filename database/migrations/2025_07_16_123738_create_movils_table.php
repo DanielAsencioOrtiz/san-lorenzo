@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('movils', function (Blueprint $table) {
             $table->id();
-            $table->string('marca');
+            $table->string('modelo');
             $table->string('placa');
+            $table->string('serie');
+            $table->string('descripcion');
+            $table->string('forms');
             $table->boolean('estado')->default(1);
             $table->timestamps();
         });

@@ -16,10 +16,10 @@ class Personal extends Model
         'id_documento',
         'nombres',
         'apellidos',
-        'correo',
         'telefono',
-        'direccion',
         'id_tipo_personal',
+        'brevete',
+        'fecha_ingreso',
         'estado',
     ];
 

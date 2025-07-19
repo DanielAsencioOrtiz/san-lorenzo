@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreignId('id_documento')->references('id')->on('tipo_documentos');
             $table->string('nombres');
             $table->string('apellidos');
-            $table->string('correo')->nullable();
             $table->string('telefono')->nullable();
-            $table->string('direccion')->nullable();
             $table->foreignId('id_tipo_personal')->references('id')->on('tipo_personals');
+            $table->string('brevete')->nullable();
+            $table->date('fecha_ingreso');
             $table->boolean('estado')->default(1);
             $table->timestamps();
         });

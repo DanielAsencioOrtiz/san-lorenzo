@@ -10,8 +10,8 @@ class SlamController extends Controller
 {
     public function index()
     {
-        $slams = Slam::where('estado', 1)->get();
-        $slamsEliminadas = Slam::where('estado', 0)->get();
+        $slams = Slam::where('estado', 1)->orderBy('created_at', 'desc')->get();
+        $slamsEliminadas = Slam::where('estado', 0)->orderBy('created_at', 'desc')->get();
         return view('slam.index', compact('slams','slamsEliminadas'));
     }
 

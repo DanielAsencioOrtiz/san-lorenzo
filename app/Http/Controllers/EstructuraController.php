@@ -10,8 +10,8 @@ class EstructuraController extends Controller
 {
     public function index()
     {
-        $estructuras = Estructura::where('estado', 1)->get();
-        $estructurasEliminadas = Estructura::where('estado', 0)->get();
+        $estructuras = Estructura::where('estado', 1)->orderBy('created_at', 'desc')->get();
+        $estructurasEliminadas = Estructura::where('estado', 0)->orderBy('created_at', 'desc')->get();
         return view('estructura.index', compact('estructuras', 'estructurasEliminadas'));
     }
 
@@ -26,7 +26,7 @@ class EstructuraController extends Controller
             ],
         ], [
             'nombre_estructura.required' => 'El nombre de la estructura es obligatorio.',
-            'nombre.unique' => 'Ya existe una estructura activa con ese nombre.',
+            'nombre_estructura.unique' => 'Ya existe una estructura activa con ese nombre.',
         ]);
 
         Estructura::create([
@@ -70,7 +70,7 @@ class EstructuraController extends Controller
         return response()->json(['success' => true, 'message' => 'Estructura eliminada correctamente.']);
     }
 
-    public function restore($id)
+    public function restores($id)
     {
         $estructura = Estructura::findOrFail($id);
         $existeActiva = Estructura::where('nombre_estructura', $estructura->nombre_estructura)
