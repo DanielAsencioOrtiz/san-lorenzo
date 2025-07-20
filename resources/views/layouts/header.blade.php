@@ -51,6 +51,10 @@
                 @can ('ver slam')
                     <a class="collapse-item {{ request()->routeIs('slams.index') ? 'active' : '' }}" href="{{route('slams.index')}}">Slams</a>
                 @endcan
+                @can ('ver piedra')
+                    <a class="collapse-item {{ request()->routeIs('piedras.index') ? 'active' : '' }}" href="{{route('piedras.index')}}">Piedras</a>
+                @endcan
+                
                 @can ('ver tipo cemento')
                 <a class="collapse-item {{ request()->routeIs('tipo_cementos.index') ? 'active' : '' }}" href="{{route('tipo_cementos.index')}}">Tipo de Cemento</a>
                 @endcan

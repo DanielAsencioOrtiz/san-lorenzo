@@ -90,6 +90,11 @@ class PermisoSeeder extends Seeder
             'editar slam',
             'eliminar slam',
             'restaurar slam',
+            'ver piedra',
+            'crear piedra',
+            'editar piedra',
+            'eliminar piedra',
+            'restaurar piedra',
         ];
 
         // Crear permisos

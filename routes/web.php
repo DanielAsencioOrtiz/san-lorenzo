@@ -17,7 +17,7 @@ use App\Http\Controllers\TipoPersonalController;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\TipoDocumentoController;
 use App\Http\Controllers\PersonalController;
-
+use App\Http\Controllers\PiedraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -144,5 +144,11 @@ Route::post('/personal/{id}', [PersonalController::class, 'update'])->name('pers
 Route::get('/personal-delete/{id}', [PersonalController::class, 'destroy']);
 Route::get('/personal-restore/{id}', [PersonalController::class, 'restore']);
 
+//PIEDRAS
+Route::get('/piedras', [PiedraController::class, 'index'])->name('piedras.index');
+Route::post('/piedras', [PiedraController::class, 'store'])->name('piedras.store');
+Route::post('/piedras/{id}', [PiedraController::class, 'update'])->name('piedras.update');
+Route::get('/piedras-delete/{id}', [PiedraController::class, 'destroy']);
+Route::get('/piedras-restore/{id}', [PiedraController::class, 'restore']);
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');
