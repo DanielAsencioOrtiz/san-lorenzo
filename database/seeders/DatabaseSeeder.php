@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoPersonalSeeder::class);
         $this->call(SedeSeeder::class);
         $this->call(TipoDocumentoSeeder::class);
+        $this->call(PiedraSeeder::class);
     }
 }

@@ -22,7 +22,7 @@ class Cliente extends Model
     ];
 
     // Relaciones
-    public function tipoDocumento()
+    public function documento()
     {
         return $this->belongsTo(TipoDocumento::class, 'id_documento');
     }

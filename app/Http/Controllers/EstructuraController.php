@@ -70,7 +70,7 @@ class EstructuraController extends Controller
         return response()->json(['success' => true, 'message' => 'Estructura eliminada correctamente.']);
     }
 
-    public function restores($id)
+    public function restore($id)
     {
         $estructura = Estructura::findOrFail($id);
         $existeActiva = Estructura::where('nombre_estructura', $estructura->nombre_estructura)

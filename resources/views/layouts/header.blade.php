@@ -32,12 +32,12 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed {{ request()->is('tipo_concretos*','metodo_colocacions*','bombas*', 'tipo_cementos*', 'estructuras*','obras*','resistencias*','slams*') ? 'active' : '' }}" href="#" data-toggle="collapse" data-target="#collapsePages"
+        <a class="nav-link collapsed {{ request()->is('tipo_concretos*','metodo_colocacions*','bombas*', 'tipo_cementos*', 'estructuras*','obras*','resistencias*','piedras*','slams*') ? 'active' : '' }}" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-truck-loading"></i>
             <span>Configuración Despacho</span>
         </a>
-        <div id="collapsePages" class="collapse {{ request()->is('tipo_concretos*','metodo_colocacions*','bombas*', 'tipo_cementos*', 'estructuras*','obras*','resistencias*','slams*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages" class="collapse {{ request()->is('tipo_concretos*','metodo_colocacions*','bombas*', 'tipo_cementos*', 'estructuras*','obras*','resistencias*','piedras*','slams*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @can ('ver tipo concreto')
                     <a class="collapse-item {{ request()->routeIs('tipo_concretos.index') ? 'active' : '' }}" href="{{route('tipo_concretos.index')}}">Tipo de Concreto</a>
@@ -103,9 +103,9 @@
     </li>
     @endcan
 
-    @can('ver clientes')
-    <li class="nav-item">
-        <a class="nav-link " href="#">
+    @can('ver cliente')
+    <li class="nav-item {{ request()->routeIs('clientes.index') ? 'active' : '' }}">
+        <a class="nav-link " href="{{route('clientes.index')}}">
             <i class="fas fa-handshake"></i>
             <span>Clientes</span></a>
     </li>

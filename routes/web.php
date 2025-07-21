@@ -18,6 +18,7 @@ use App\Http\Controllers\SedeController;
 use App\Http\Controllers\TipoDocumentoController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\PiedraController;
+use App\Http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,5 +151,19 @@ Route::post('/piedras', [PiedraController::class, 'store'])->name('piedras.store
 Route::post('/piedras/{id}', [PiedraController::class, 'update'])->name('piedras.update');
 Route::get('/piedras-delete/{id}', [PiedraController::class, 'destroy']);
 Route::get('/piedras-restore/{id}', [PiedraController::class, 'restore']);
+
+
+//CLIENTES
+Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
+Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
+Route::post('/clientes/{id}', [ClienteController::class, 'update'])->name('clientes.update');
+Route::get('/clientes-delete/{id}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
+Route::get('/clientes-restore/{id}', [ClienteController::class, 'restore'])->name('clientes.restore');
+
+// Selects dinámicos (AJAX)
+Route::get('/clientes/provincias/{id_departamento}', [ClienteController::class, 'getProvincias'])->name('clientes.provincias');
+Route::get('/clientes/distritos/{id_provincia}', [ClienteController::class, 'getDistritos'])->name('clientes.distritos');
+Route::get('/consulta-documento/{tipo}/{numero}', [ClienteController::class, 'consultaDocumento']);
+
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');
