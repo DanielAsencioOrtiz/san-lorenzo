@@ -27,6 +27,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item {{ request()->routeIs('sede.index') ? 'active' : '' }}" href="{{route('sede.index')}}">Sedes</a>
                 <a class="collapse-item {{ request()->routeIs('tipo-documento.index') ? 'active' : '' }}" href="{{route('tipo-documento.index')}}">Tipo de Documento</a>
+                <a class="collapse-item {{ request()->routeIs('canteras.index') ? 'active' : '' }}" href="{{route('canteras.index')}}">Cantera</a>
             </div>
         </div>
     </li>

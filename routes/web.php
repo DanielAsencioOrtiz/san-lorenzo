@@ -19,6 +19,7 @@ use App\Http\Controllers\TipoDocumentoController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\PiedraController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CanteraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -165,5 +166,11 @@ Route::get('/clientes/provincias/{id_departamento}', [ClienteController::class, 
 Route::get('/clientes/distritos/{id_provincia}', [ClienteController::class, 'getDistritos'])->name('clientes.distritos');
 Route::get('/consulta-documento/{tipo}/{numero}', [ClienteController::class, 'consultaDocumento']);
 
+//CANTERAS
+Route::get('/canteras', [CanteraController::class, 'index'])->name('canteras.index');
+Route::post('/canteras', [CanteraController::class, 'store'])->name('canteras.store');
+Route::post('/canteras/{id}', [CanteraController::class, 'update'])->name('canteras.update');
+Route::get('/canteras-delete/{id}', [CanteraController::class, 'destroy']);
+Route::get('/canteras-restore/{id}', [CanteraController::class, 'restore']);
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');
