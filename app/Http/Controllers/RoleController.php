@@ -12,22 +12,40 @@ class RoleController extends Controller
     {
         $roles = Role::with('permissions')->get();
         $permissions = Permission::all();
-        return view('roles.index', compact('roles', 'permissions'));
+
+        // Agrupar por prefijo/categoría
+        $groupedPermissions = $permissions->groupBy(function($perm) {
+            return explode(' ', $perm->name)[1] ?? 'otros';
+        });
+
+        return view('roles.index', [
+            'roles' => $roles,
+            'permissions' => $groupedPermissions,
+            'totalPermissions' => $permissions->count()
+        ]);
     }
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required|unique:roles,name']);
-        Role::create(['name' => $request->name]);
-        return redirect()->back()->with('success', 'Rol creado');
+        $request->validate([
+            'name' => 'required|unique:roles,name',
+        ]);
+
+        $role = Role::create(['name' => $request->name]);
+
+        if ($request->has('permissions')) {
+            $role->syncPermissions($request->permissions);
+        }
+
+        return redirect()->route('roles.index')->with('success', 'Rol creado correctamente.');
     }
 
-    public function assignPermissions(Request $request, $roleId)
+    public function assignPermissions(Request $request, Role $role)
     {
-        $role = Role::findById($roleId);
-        $role->syncPermissions($request->permissions); // array de nombres de permisos
-        return redirect()->back()->with('success', 'Permisos actualizados');
+        $role->syncPermissions($request->permissions ?? []);
+        return redirect()->route('roles.index')->with('success', 'Permisos actualizados.');
     }
+
 
     public function destroy($id)
     {

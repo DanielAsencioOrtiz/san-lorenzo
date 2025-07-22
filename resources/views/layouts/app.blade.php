@@ -51,6 +51,16 @@
     html{
         height: 100% !important;
     }
+    .sidebar-dark .nav-item.active .nav-link {
+        color: black !important;
+    }
+    .sidebar-dark .nav-item.active .nav-link i  {
+        color: black !important;
+    }
+    .sidebar .nav-item.active {
+        background: #c7c7c7;
+        color: black !important;
+    }
 </style>
     @yield('css')
 </head>
