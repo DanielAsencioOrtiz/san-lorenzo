@@ -18,6 +18,7 @@ use App\Http\Controllers\SedeController;
 use App\Http\Controllers\TipoDocumentoController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\PiedraController;
+use App\Http\Controllers\CanteraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,5 +151,12 @@ Route::post('/piedras', [PiedraController::class, 'store'])->name('piedras.store
 Route::post('/piedras/{id}', [PiedraController::class, 'update'])->name('piedras.update');
 Route::get('/piedras-delete/{id}', [PiedraController::class, 'destroy']);
 Route::get('/piedras-restore/{id}', [PiedraController::class, 'restore']);
+
+//CANTERAS
+Route::get('/canteras', [CanteraController::class, 'index'])->name('canteras.index');
+Route::post('/canteras', [CanteraController::class, 'store'])->name('canteras.store');
+Route::post('/canteras/{id}', [CanteraController::class, 'update'])->name('canteras.update');
+Route::get('/canteras-delete/{id}', [CanteraController::class, 'destroy']);
+Route::get('/canteras-restore/{id}', [CanteraController::class, 'restore']);
 
 Route::post('/permissions', [PermissionController::class, 'store'])->middleware('auth');

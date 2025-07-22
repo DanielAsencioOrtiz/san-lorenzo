@@ -95,6 +95,11 @@ class PermisoSeeder extends Seeder
             'editar piedra',
             'eliminar piedra',
             'restaurar piedra',
+            'ver cantera',
+            'crear cantera',
+            'editar cantera',
+            'eliminar cantera',
+            'restaurar cantera',
         ];
 
         // Crear permisos
