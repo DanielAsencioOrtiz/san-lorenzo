@@ -15,18 +15,18 @@
                     <td class="text-center">
                         @if ($tipo == 'activo')
                             @can('editar estructura')
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarEstructura-{{ $estructura->id }}">
+                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarEstructura-{{ $estructura->id }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             @endcan
                             @can('eliminar estructura')
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $estructura->id }}">
+                                <a href="#" class="btn btn-danger btn-sm delete" data-id="{{ $estructura->id }}">
                                     <i class="fa fa-times"></i>
                                 </a>
                             @endcan
                         @else
                             @can('restaurar estructura')
-                                <a href="#" class="btn btn-success restore" data-id="{{ $estructura->id }}">
+                                <a href="#" class="btn btn-success btn-sm restore" data-id="{{ $estructura->id }}">
                                     <i class="fa fa-undo"></i>
                                 </a>
                             @endcan

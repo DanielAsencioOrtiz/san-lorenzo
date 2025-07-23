@@ -23,14 +23,14 @@
                     <td class="text-center">
                         @if ($tipo == 'activo')
                             @can('editar maquinaria')
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarMovil-{{ $movil->id }}"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarMovil-{{ $movil->id }}"><i class="fa fa-edit"></i></a>
                             @endcan
                             @can('eliminar maquinaria')
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $movil->id }}"><i class="fa fa-times"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm delete" data-id="{{ $movil->id }}"><i class="fa fa-times"></i></a>
                             @endcan
                         @else
                             @can('restaurar maquinaria')
-                                <a href="#" class="btn btn-success restore" data-id="{{ $movil->id }}"><i class="fa fa-undo"></i></a>
+                                <a href="#" class="btn btn-success btn-sm restore" data-id="{{ $movil->id }}"><i class="fa fa-undo"></i></a>
                             @endcan
                         @endif
                     </td>

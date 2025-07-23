@@ -20,6 +20,8 @@ use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\PiedraController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CanteraController;
+use App\Http\Controllers\ProgramaDespachoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +53,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
     Route::post('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
     Route::get('/usuarios-delete/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+    Route::get('/usuarios-restore/{id}', [UserController::class, 'restore'])->name('usuarios.restore');
 });
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/programas', [ProgramaDespachoController::class, 'index'])->name('programas.index');
+    Route::post('/programas', [ProgramaDespachoController::class, 'store'])->name('programas.store');
+    Route::post('/programas/{id}', [ProgramaDespachoController::class, 'update'])->name('programas.update');
+    Route::get('/programas-delete/{id}', [ProgramaDespachoController::class, 'destroy'])->name('programas.destroy');
+    Route::get('/programas-restore/{id}', [ProgramaDespachoController::class, 'restore'])->name('programas.restore');
+});
+
 
 //MOVILES
 Route::get('/movils', [MovilController::class, 'index'])->name('movil.index');

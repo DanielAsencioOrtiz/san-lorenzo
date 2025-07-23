@@ -26,4 +26,6 @@ class PersonalDespacho extends Model
     {
         return $this->belongsTo(Personal::class, 'id_personal');
     }
+
+
 }

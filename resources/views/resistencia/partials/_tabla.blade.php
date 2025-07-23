@@ -15,14 +15,14 @@
                     <td class="text-center">
                         @if ($tipo == 'activo')
                             @can('editar resistencia')
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarResistencia-{{ $resistencia->id }}"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editarResistencia-{{ $resistencia->id }}"><i class="fa fa-edit"></i></a>
                             @endcan
                             @can('eliminar resistencia')
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $resistencia->id }}"><i class="fa fa-times"></i></a>
+                                <a href="#" class="btn btn-sm btn-danger delete" data-id="{{ $resistencia->id }}"><i class="fa fa-times"></i></a>
                             @endcan
                         @else
                             @can('restaurar resistencia')
-                                <a href="#" class="btn btn-success restore" data-id="{{ $resistencia->id }}"><i class="fa fa-undo"></i></a>
+                                <a href="#" class="btn btn-sm btn-success restore" data-id="{{ $resistencia->id }}"><i class="fa fa-undo"></i></a>
                             @endcan
                         @endif
                     </td>

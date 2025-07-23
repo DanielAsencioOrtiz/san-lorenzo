@@ -56,7 +56,7 @@
                         </td>
                         <td>
                             {{-- Botón para abrir modal de edición --}}
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRoleModal_{{ $role->id }}"><i class="fa fa-edit"></i> </button>
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editRoleModal_{{ $role->id }}"><i class="fa fa-edit"></i> </button>
 
                             {{-- Modal de edición --}}
                             <div class="modal fade" id="editRoleModal_{{ $role->id }}" tabindex="-1">
@@ -103,7 +103,7 @@
                             <form method="POST" action="{{ route('roles.destroy', $role->id) }}" class="d-inline" onsubmit="return confirm('¿Eliminar este rol?')">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                                <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                             </form>
                         </td>
                     </tr>

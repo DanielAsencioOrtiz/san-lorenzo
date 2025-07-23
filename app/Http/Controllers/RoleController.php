@@ -10,7 +10,10 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::with('permissions')->get();
+        $roles = Role::with('permissions')
+        ->where('name', '!=', 'SUPERADMINISTRADOR')
+        ->get();
+
         $permissions = Permission::all();
 
         // Agrupar por prefijo/categoría

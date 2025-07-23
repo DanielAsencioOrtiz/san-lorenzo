@@ -24,10 +24,10 @@
                     <td>{{ $p->telefono }}</td>
                     <td class="text-center">
                         @if ($tipo == 'activo')
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarPersonal-{{ $p->id }}"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger delete" data-id="{{ $p->id }}"><i class="fa fa-times"></i></a>
+                            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarPersonal-{{ $p->id }}"><i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger btn-sm delete" data-id="{{ $p->id }}"><i class="fa fa-times"></i></a>
                         @else
-                            <a href="#" class="btn btn-success restore" data-id="{{ $p->id }}"><i class="fa fa-undo"></i></a>
+                            <a href="#" class="btn btn-success btn-sm restore" data-id="{{ $p->id }}"><i class="fa fa-undo"></i></a>
                         @endif
                     </td>
                 </tr>

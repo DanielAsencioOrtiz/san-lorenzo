@@ -30,18 +30,18 @@
                     <td class="text-center">
                         @if ($tipo == 'activo')
                             @can('editar cliente')
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarCliente-{{ $cliente->id }}">
+                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarCliente-{{ $cliente->id }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             @endcan
                             @can('eliminar cliente')
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $cliente->id }}">
+                                <a href="#" class="btn btn-danger btn-sm delete" data-id="{{ $cliente->id }}">
                                     <i class="fa fa-times"></i>
                                 </a>
                             @endcan
                         @else
                             @can('restaurar cliente')
-                                <a href="#" class="btn btn-success restore" data-id="{{ $cliente->id }}">
+                                <a href="#" class="btn btn-success btn-sm restore" data-id="{{ $cliente->id }}">
                                     <i class="fa fa-undo"></i>
                                 </a>
                             @endcan

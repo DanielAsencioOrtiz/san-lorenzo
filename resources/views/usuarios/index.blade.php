@@ -12,11 +12,9 @@
 @endsection
 
 @section('content')
-    <!-- Encabezado -->
     <h1 class="h3 mb-2 text-gray-800">Listado de usuarios</h1>
     <p class="mb-4">Administración de Usuarios y Roles</p>
 
-    <!-- Card principal -->
     <div class="card shadow mb-4">
         {{-- Botón crear --}}
         @can('crear usuarios')
@@ -26,7 +24,21 @@
             </a>
         </div>
         @endcan
+
         <div class="card-body">
+            {{-- Errores --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            {{-- Mensajes --}}
             @if (session('mensaje'))
                 <div class="alert alert-success alert-dismissible fade show">
                     {{ session('mensaje') }}
@@ -40,78 +52,137 @@
                 </div>
             @endif
 
-            <div class="table-responsive">
-                <table class="table table-bordered" width="100%" id="tabla-traducida">
-                    <thead class="header-modal">
-                        <tr>
-                            <th class="text-center">#</th>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Roles</th>
-                            <th class="text-center">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($usuarios as $key => $u)
-                            <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td>{{ $u->name }}</td>
-                                <td>{{ $u->email }}</td>
-                                <td>
-                                    @foreach ($u->roles as $r)
-                                        <span class="badge badge-info">{{ $r->name }}</span>
-                                    @endforeach
-                                </td>
-                                <td class="text-center">
-                                    @can('editar usuarios')
-                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
-                                       data-target="#editarUsuario-{{ $u->id }}"><i class="fa fa-edit"></i></a>
-                                    @endcan
-                                    @can('eliminar usuarios')
-                                    <a href="#" class="btn btn-danger btn-sm delete-user" data-id="{{ $u->id }}">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                    @endcan
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            {{-- Tabs --}}
+            <ul class="nav nav-tabs mb-3" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="activos-tab" data-toggle="tab" href="#activos" role="tab">Activos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="eliminados-tab" data-toggle="tab" href="#eliminados" role="tab">Eliminados</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="activos" role="tabpanel">
+                    @include('usuarios.partials._tabla', ['usuarios' => $usuarios, 'tipo' => 'activo', 'tabla' => '1'])
+                </div>
+                <div class="tab-pane fade" id="eliminados" role="tabpanel">
+                    @include('usuarios.partials._tabla', ['usuarios' => $usuariosEliminados, 'tipo' => 'eliminado', 'tabla' => '2'])
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- ======= Modal Nuevo Usuario ======= -->
-    <div class="modal fade" id="nuevoUsuario" tabindex="-1">
+  <!-- ======= Modal Nuevo Usuario ======= -->
+<div class="modal fade" id="nuevoUsuario" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header header-modal">
+                <h5 class="modal-title">Nuevo Usuario</h5>
+                <button class="close" type="button" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <form action="{{ route('usuarios.store') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nombre <span class="red">*</span></label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>DNI <span class="red">*</span></label>
+                        <input type="text" name="dni" class="form-control" minlength="8" maxlength="8" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span class="red">*</span></label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña <span class="red">*</span></label>
+                        <input type="password" name="password" class="form-control" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label>Roles <span class="red">*</span></label>
+                        <select name="roles[]" class="form-control select2" multiple required>
+                            @foreach($roles as $r)
+                                <option value="{{ $r->name }}">{{ $r->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sede <span class="red">*</span></label>
+                        <select name="id_sede" class="form-control" required>
+                            @foreach($sedes as $s)
+                                <option value="{{ $s->id }}">{{ $s->nombre_sede }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- ======= Modales Editar Usuario ======= -->
+@foreach ($usuarios as $u)
+    <div class="modal fade" id="editarUsuario-{{ $u->id }}" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header header-modal">
-                    <h5 class="modal-title">Nuevo Usuario</h5>
+                    <h5 class="modal-title">Editar Usuario</h5>
                     <button class="close" type="button" data-dismiss="modal"><span>&times;</span></button>
                 </div>
-                <form action="{{ route('usuarios.store') }}" method="POST">
+                <form action="{{ route('usuarios.update', $u->id) }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nombre <span class="red">*</span></label>
-                            <input type="text" name="name" class="form-control" required>
+                            <input type="text" name="name" class="form-control" value="{{ $u->name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>DNI <span class="red">*</span></label>
+                            <input type="text" name="dni" class="form-control" minlength="8" maxlength="8" value="{{ $u->dni }}" required>
                         </div>
                         <div class="form-group">
                             <label>Email <span class="red">*</span></label>
-                            <input type="email" name="email" class="form-control" required>
+                            <input type="email" name="email" class="form-control" value="{{ $u->email }}" required>
                         </div>
                         <div class="form-group">
-                            <label>Contraseña <span class="red">*</span></label>
-                            <input type="password" name="password" class="form-control" required minlength="6">
+                            <label>Contraseña (dejar vacío para no cambiar)</label>
+                            <input type="password" name="password" class="form-control" minlength="6">
                         </div>
+                        @if(!$u->hasRole('SUPERADMINISTRADOR'))
                         <div class="form-group">
-                            <label>Roles</label>
-                            <select name="roles[]" class="form-control select2" multiple>
+                            <label>Roles <span class="red">*</span></label>
+                            <select name="roles[]" class="form-control select2" multiple required>
                                 @foreach($roles as $r)
-                                    <option value="{{ $r->name }}">{{ $r->name }}</option>
+                                    <option value="{{ $r->name }}"
+                                        {{ $u->roles->contains('name', $r->name) ? 'selected' : '' }}>
+                                        {{ $r->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
+                        @endif
+          
+                        @if(!$u->hasRole('SUPERADMINISTRADOR'))
+                        <div class="form-group">
+                            <label>Sede <span class="red">*</span></label>
+                            <select name="id_sede" class="form-control" required>
+                                @foreach($sedes as $s)
+                                    <option value="{{ $s->id }}"
+                                        {{ $u->id_sede == $s->id ? 'selected' : '' }}>
+                                        {{ $s->nombre_sede }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @endif
+                       
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -121,52 +192,8 @@
             </div>
         </div>
     </div>
+@endforeach
 
-    <!-- ======= Modales Editar Usuario ======= -->
-    @foreach ($usuarios as $u)
-        <div class="modal fade" id="editarUsuario-{{ $u->id }}" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header header-modal">
-                        <h5 class="modal-title">Editar Usuario</h5>
-                        <button class="close" type="button" data-dismiss="modal"><span>&times;</span></button>
-                    </div>
-                    <form action="{{ route('usuarios.update', $u->id) }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Nombre <span class="red">*</span></label>
-                                <input type="text" name="name" class="form-control" value="{{ $u->name }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Email <span class="red">*</span></label>
-                                <input type="email" name="email" class="form-control" value="{{ $u->email }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Contraseña (dejar vacío para no cambiar)</label>
-                                <input type="password" name="password" class="form-control" minlength="6">
-                            </div>
-                            <div class="form-group">
-                                <label>Roles</label>
-                                <select name="roles[]" class="form-control select2" multiple>
-                                    @foreach($roles as $r)
-                                        <option value="{{ $r->name }}"
-                                            {{ $u->roles->contains('name', $r->name) ? 'selected' : '' }}>
-                                            {{ $r->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" type="submit">Guardar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endforeach
 @endsection
 
 @section('scripts')
@@ -178,11 +205,9 @@
         $(function () {
             $('.select2').select2({ width: '100%' });
 
-            // Eliminar usuario
             $('.delete-user').on('click', function (e) {
                 e.preventDefault();
                 const id = $(this).data('id');
-                const url = '/usuarios-delete/' + id;
 
                 swal({
                     title: "Eliminar usuario",
@@ -195,7 +220,7 @@
                 }, function () {
                     $.ajax({
                         type: "GET",
-                        url: url,
+                        url: "/usuarios-delete/" + id,
                         success: function () {
                             swal("¡Eliminado!", "El usuario ha sido eliminado.", "success");
                             location.reload();
@@ -207,5 +232,38 @@
                 });
             });
         });
+    </script>
+    <script>
+        $('.restore-user').on('click', function (e) {
+            e.preventDefault();
+            const id = $(this).data('id');
+
+            swal({
+                title: "¿Restaurar usuario?",
+                text: "El usuario será reactivado.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#28a745",
+                confirmButtonText: "Sí, restaurar",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/usuarios-restore/" + id,
+                    success: function (data) {
+                        if (data.success) {
+                            swal("Restaurado", data.message, "success");
+                            location.reload();
+                        } else {
+                            swal("Error", data.message, "error");
+                        }
+                    },
+                    error: function () {
+                        swal("Error", "No se pudo restaurar el usuario.", "error");
+                    }
+                });
+            });
+        });
+
     </script>
 @endsection

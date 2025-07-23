@@ -15,14 +15,14 @@
                     <td class="text-center">
                         @if ($tipo == 'activo')
                             @can('editar metodo colocacion')
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarMetodoColocacion-{{ $metodo->id }}"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarMetodoColocacion-{{ $metodo->id }}"><i class="fa fa-edit"></i></a>
                             @endcan
                             @can('eliminar metodo colocacion')
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $metodo->id }}"><i class="fa fa-times"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm delete" data-id="{{ $metodo->id }}"><i class="fa fa-times"></i></a>
                             @endcan
                         @else
                             @can('restaurar metodo colocacion')
-                                <a href="#" class="btn btn-success restore" data-id="{{ $metodo->id }}"><i class="fa fa-undo"></i></a>
+                                <a href="#" class="btn btn-success btn-sm restore" data-id="{{ $metodo->id }}"><i class="fa fa-undo"></i></a>
                             @endcan
                         @endif
                     </td>

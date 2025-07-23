@@ -18,10 +18,10 @@
                     <td>{{ $doc->mostrar_personal ? 'Sí' : 'No' }}</td>
                     <td class="text-center">
                         @if ($tipo == 'activo')
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarDocumento-{{ $doc->id }}"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger delete" data-id="{{ $doc->id }}"><i class="fa fa-times"></i></a>
+                            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarDocumento-{{ $doc->id }}"><i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger btn-sm delete" data-id="{{ $doc->id }}"><i class="fa fa-times"></i></a>
                         @else
-                            <a href="#" class="btn btn-success restore" data-id="{{ $doc->id }}"><i class="fa fa-undo"></i></a>
+                            <a href="#" class="btn btn-success btn-sm restore" data-id="{{ $doc->id }}"><i class="fa fa-undo"></i></a>
                         @endif
                     </td>
                 </tr>

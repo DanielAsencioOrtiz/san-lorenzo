@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'dni',
+        'id_sede',
+        'estado'
     ];
 
     /**
@@ -46,5 +49,11 @@ class User extends Authenticatable
     public function users()
     {
         return $this->belongsToMany(\App\Models\User::class, 'model_has_roles', 'role_id', 'model_id');
+    }
+
+        // Relaciones
+    public function sede()
+    {
+        return $this->belongsTo(Sede::class, 'id_sede');
     }
 }

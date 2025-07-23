@@ -23,6 +23,7 @@ class PermisoSeeder extends Seeder
             'crear usuarios',
             'editar usuarios',
             'eliminar usuarios',
+            'restaurar usuarios',
             'ver cliente',
             'crear cliente',
             'editar cliente',
@@ -112,16 +113,19 @@ class PermisoSeeder extends Seeder
         }
 
         // Crear roles y asignar permisos
-        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $admin = Role::firstOrCreate(['name' => 'SUPERADMINISTRADOR']);
         $admin->syncPermissions(Permission::all());
 
-        $moderador = Role::firstOrCreate(['name' => 'laboratorista']);
+        $moderador = Role::firstOrCreate(['name' => 'ADMINISTRADOR DE PLANTA']);
         $moderador->syncPermissions([
             'ver usuarios',
             'ver control',
         ]);
 
-        $usuario = Role::firstOrCreate(['name' => 'usuario']);
+        $usuario = Role::firstOrCreate(['name' => 'JEFE DE PLANTA']);
+        $programador = Role::firstOrCreate(['name' => 'PROGRAMADOR']);
+        $operador_planta = Role::firstOrCreate(['name' => 'OPERADOR DE PLANTA']);
+        $responsable_planta = Role::firstOrCreate(['name' => 'RESPONSABLE DE PLANTA']);
         // este rol no tiene permisos asignados directamente
     }
 }

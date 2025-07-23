@@ -24,4 +24,9 @@ class ProgramaDespacho extends Model
     {
         return $this->belongsTo(Sede::class, 'id_sede');
     }
+
+    public function personalDespacho()
+    {
+        return $this->belongsToMany(Personal::class, 'personal_despachos', 'id_programa_despacho', 'id_personal');
+    }
 }

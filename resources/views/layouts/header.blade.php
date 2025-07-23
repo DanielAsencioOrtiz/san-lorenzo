@@ -17,13 +17,14 @@
     </div>
 -->
 
+@role('SUPERADMINISTRADOR')
     <li class="nav-item">
-        <a class="nav-link collapsed {{ request()->is('tipo-documento*','sede*') ? 'active' : '' }}" href="#" data-toggle="collapse" data-target="#collapsePages2"
+        <a class="nav-link collapsed {{ request()->is('tipo-documento*','sede*','canteras*') ? 'active' : '' }}" href="#" data-toggle="collapse" data-target="#collapsePages2"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-cogs"></i>
             <span>Configuración General</span>
         </a>
-        <div id="collapsePages2" class="collapse {{ request()->is('tipo-documento*','sede*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages2" class="collapse {{ request()->is('tipo-documento*','sede*','canteras*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item {{ request()->routeIs('sede.index') ? 'active' : '' }}" href="{{route('sede.index')}}">Sedes</a>
                 <a class="collapse-item {{ request()->routeIs('tipo-documento.index') ? 'active' : '' }}" href="{{route('tipo-documento.index')}}">Tipo de Documento</a>
@@ -31,6 +32,7 @@
             </div>
         </div>
     </li>
+    @endrole
 
     <li class="nav-item">
         <a class="nav-link collapsed {{ request()->is('tipo_concretos*','metodo_colocacions*','bombas*', 'tipo_cementos*', 'estructuras*','obras*','resistencias*','piedras*','slams*') ? 'active' : '' }}" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -72,7 +74,7 @@
         </div>
     </li>
 
-    @role('admin')
+    @role('SUPERADMINISTRADOR')
     <li class="nav-item {{ request()->routeIs('roles.index*') ? 'active' : '' }}">
         <a class="nav-link " href="{{route('roles.index')}}">
             <i class="fas fa-user-shield"></i>
@@ -121,19 +123,21 @@
     @endcan
 
 
+
+
+    @can('ver programa')
+        <li class="nav-item {{ request()->routeIs('programas.index') ? 'active' : '' }}">
+        <a class="nav-link " href="{{route('programas.index')}}">
+            <i class="fas fa-calendar-check"></i>
+            <span>Programa de Despacho</span></a>
+    </li>
+    @endcan
+
     @can('ver control')
     <li class="nav-item">
         <a class="nav-link " href="#">
             <i class="fas fa-clipboard-check"></i>
             <span>Control de Despacho</span></a>
-    </li>
-    @endcan
-
-    @can('ver programa')
-        <li class="nav-item">
-        <a class="nav-link " href="#">
-            <i class="fas fa-calendar-check"></i>
-            <span>Programa de Despacho</span></a>
     </li>
     @endcan
 
@@ -161,34 +165,6 @@
     </li>
     @endcan
 
-
-    
-
-    @role('Estudiante')
-        <li class="nav-item {{ request()->routeIs('panel.vista.estudiante') ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('panel.vista.estudiante')}}">
-                <i class="fas fa-table"></i>
-                <span>Panel de cursos</span></a>
-        </li>
-        <li class="nav-item {{ request()->routeIs('cursos.matriculados.estudiante') ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('cursos.matriculados.estudiante')}}">
-                <i class="fas fa-hand-holding-usd"></i>
-                <span>Historial de Pagos</span></a>
-        </li>
-        <li class="nav-item {{ request()->routeIs('notas.estudiante') ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('notas.estudiante')}}">
-                <i class="fas fa-book"></i>
-                <span>Historial de Notas</span></a>
-        </li>
-    @endrole
-
-    @role('Docente')
-    <li class="nav-item {{ request()->routeIs('cursos.matriculados.docente') ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('cursos.matriculados.docente')}}">
-            <i class="fas fa-book"></i>
-            <span>Registro de Notas</span></a>
-    </li>
-    @endrole
 
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

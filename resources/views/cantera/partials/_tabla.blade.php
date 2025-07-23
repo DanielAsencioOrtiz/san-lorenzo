@@ -15,14 +15,14 @@
                     <td class="text-center">
                         @if ($tipo == 'activo')
                             @can('editar cantera')
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarCantera-{{ $cantera->id }}"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarCantera-{{ $cantera->id }}"><i class="fa fa-edit"></i></a>
                             @endcan
                             @can('eliminar cantera')
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $cantera->id }}"><i class="fa fa-times"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm delete" data-id="{{ $cantera->id }}"><i class="fa fa-times"></i></a>
                             @endcan
                         @else
                             @can('restaurar cantera')
-                                <a href="#" class="btn btn-success restore" data-id="{{ $cantera->id }}"><i class="fa fa-undo"></i></a>
+                                <a href="#" class="btn btn-success btn-sm restore" data-id="{{ $cantera->id }}"><i class="fa fa-undo"></i></a>
                             @endcan
                         @endif
                     </td>

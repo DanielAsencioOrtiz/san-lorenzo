@@ -18,10 +18,11 @@ class UsuarioSeeder extends Seeder
             [
                 'name' => 'Daniel Asencio',
                 'password' => bcrypt('nsyydkhw'),
+                'dni' => '12345678',
             ]
         );
 
         // Asignar rol Admin
-        $user->assignRole('admin');
+        $user->assignRole('SUPERADMINISTRADOR');
     }
 }

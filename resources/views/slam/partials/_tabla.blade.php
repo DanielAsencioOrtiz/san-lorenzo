@@ -15,14 +15,14 @@
                     <td class="text-center">
                         @if ($tipo == 'activo')
                             @can('editar slam')
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarSlam-{{ $slam->id }}"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarSlam-{{ $slam->id }}"><i class="fa fa-edit"></i></a>
                             @endcan
                             @can('eliminar slam')
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $slam->id }}"><i class="fa fa-times"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm delete" data-id="{{ $slam->id }}"><i class="fa fa-times"></i></a>
                             @endcan
                         @else
                             @can('restaurar slam')
-                                <a href="#" class="btn btn-success restore" data-id="{{ $slam->id }}"><i class="fa fa-undo"></i></a>
+                                <a href="#" class="btn btn-success btn-sm restore" data-id="{{ $slam->id }}"><i class="fa fa-undo"></i></a>
                             @endcan
                         @endif
                     </td>
